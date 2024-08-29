@@ -37,17 +37,22 @@ def download(link, name='%(title)s'):
         # 'format': 'bestvideo+bestaudio/best', #берем самое лучшее качество видео и фото
         'outtmpl': '{}.%(ext)s'.format(name), #наше выбраное имя, если его не было, то стандартное - название видео на самом сайте
     }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(link, download=True)
-        downloaded_file_path = ydl.prepare_filename(info_dict)
-
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(link, download=True)
+            downloaded_file_path = ydl.prepare_filename(info_dict)
+    except Exception as e:
+        st.html("<strong>Не корректная ссылка, попробуй другую</strong>")
+        return None
     return downloaded_file_path
 
 
 def get_video(url):
   placeholder.empty()
   file_path = download(url)
-  display_file(file_path)
+  if file_path:
+    display_file(file_path)
+
 
 def app():
     cs_sidebar()

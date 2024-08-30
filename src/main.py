@@ -5,6 +5,7 @@ st.set_page_config(
     page_title='Parsing book store',
     layout="wide",
     initial_sidebar_state="expanded",
+    page_icon=":shark:",
     menu_items={
     'Get Help': 'https://www.extremelycoolapp.com/help',
     'Report a bug': "https://www.extremelycoolapp.com/bug",

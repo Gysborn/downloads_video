@@ -1,6 +1,6 @@
 import streamlit as st
 import yt_dlp
-
+import os
 st.set_page_config(
     page_title='Parsing book store',
     layout="wide",
@@ -11,7 +11,6 @@ st.set_page_config(
     'About': "# This is a header. This is an *extremely* cool app!"})
 
 placeholder = st.empty()
-
 
 def cs_sidebar():
     st.sidebar.header('Загружаем видео')
@@ -52,12 +51,13 @@ def get_video(url):
   placeholder.empty()
   file_path = download(url)
   if file_path:
-    display_file(file_path)
+    res = display_file(file_path)
+    if res == None:
+        os.remove(file_path)
 
 
 def app():
     cs_sidebar()
-
     url = st.text_input('Введите url')
     if url:
       st.button('Загрузить', on_click=get_video, args=(url,))

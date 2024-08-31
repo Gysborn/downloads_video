@@ -36,7 +36,6 @@ def download(link, name='%(title)s'):
     ydl_opts = {
         # 'format': 'bestvideo+bestaudio/best', #берем самое лучшее качество видео и фото
         'outtmpl': '{}.%(ext)s'.format(name), #наше выбраное имя, если его не было, то стандартное - название видео на самом сайте
-
     }
     with st.spinner('Загрузка...'):
         try:

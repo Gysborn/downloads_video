@@ -17,7 +17,7 @@ def cs_sidebar():
     st.sidebar.header('Загружаем видео')
     output_file = st.sidebar.radio(
     "Choice quality video",
-    [":rainbow[1080i]", ":rainbow[720i]", ":rainbow[380i]"],
+    [":rainbow[1080i]", ":rainbow[720i]", ":rainbow[480i]", ":rainbow[360i]", ":rainbow[240i]"],
     index=None,
     )
 
@@ -36,6 +36,7 @@ def download(link, name='%(title)s'):
     ydl_opts = {
         # 'format': 'bestvideo+bestaudio/best', #берем самое лучшее качество видео и фото
         'outtmpl': '{}.%(ext)s'.format(name), #наше выбраное имя, если его не было, то стандартное - название видео на самом сайте
+        'list-formats': True,
     }
     with st.spinner('Загрузка...'):
         try:
@@ -44,6 +45,7 @@ def download(link, name='%(title)s'):
                 downloaded_file_path = ydl.prepare_filename(info_dict)
         except Exception as e:
             st.html("<strong>Не корректная ссылка, попробуй другую</strong>")
+            st.error(f"Подробнее: {e}")
             return None
     return downloaded_file_path
 

@@ -1,6 +1,7 @@
 import streamlit as st
 import yt_dlp
 import os
+from utils import get_names_files
 st.set_page_config(
     page_title='Parsing book store',
     layout="wide",
@@ -61,6 +62,8 @@ def get_video(url):
 def app():
     cs_sidebar()
     url = st.text_input('Введите url')
+    if url == 'data':
+        st.write(get_names_files())
     if url:
       st.button('Загрузить', on_click=get_video, args=(url,))
     else:

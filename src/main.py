@@ -64,6 +64,7 @@ def app():
     url = st.text_input('Введите url')
     if url == 'data':
         st.write(get_names_files())
+        st.write(st.secrets['LOGIN'])
     if url:
       st.button('Загрузить', on_click=get_video, args=(url,))
     else:
